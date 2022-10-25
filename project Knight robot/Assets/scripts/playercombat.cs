@@ -18,10 +18,8 @@ public class playercombat : MonoBehaviour
         {
             Attack(); 
         }
-    } 
-     
-
-    void Attack()
+    }  
+void Attack()
     {
         // play an Attack animation  
         animator.SetTrigger("Attack");

@@ -84,10 +84,7 @@ public class playermovement : MonoBehaviour
         // Switch the way the player is labelled as facing. 
 
         transform.Rotate(0f, 180f, 0f);
-    } 
+    }  
 
-    if (Input.GetButtionDown("fire2")) 
-    { 
-        Instantiate(projectilePrefab,LaunchOffset.position,Transform,Rotation)
-    }
+
 }
