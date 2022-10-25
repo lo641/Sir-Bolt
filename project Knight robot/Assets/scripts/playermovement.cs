@@ -9,6 +9,9 @@ public class playermovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anlm;
 
+    public projectilebehaveiour projectilePrefab;
+    public Transform LaunchOffset;
+
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
@@ -81,5 +84,10 @@ public class playermovement : MonoBehaviour
         // Switch the way the player is labelled as facing. 
 
         transform.Rotate(0f, 180f, 0f);
+    } 
+
+    if (Input.GetButtionDown("fire2")) 
+    { 
+        Instantiate(projectilePrefab,LaunchOffset.position,Transform,Rotation)
     }
 }
