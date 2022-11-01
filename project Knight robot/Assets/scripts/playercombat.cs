@@ -7,6 +7,7 @@ public class playercombat : MonoBehaviour
 
     public Animator animator;
 
+    public Transform boomrang;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -17,12 +18,13 @@ public class playercombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             Attack(); 
-        }
+        }   
     }  
 void Attack()
     {
         // play an Attack animation  
         animator.SetTrigger("Attack");
+        animator.SetTrigger("boomrang");
         // Detact enemies in range of attack 
 
         // Damage them
