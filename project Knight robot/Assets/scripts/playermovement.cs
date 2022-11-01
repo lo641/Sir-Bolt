@@ -9,7 +9,8 @@ public class playermovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anlm;
 
-    public projectilebehaveiour projectilePrefab;
+    public ProjectileBehaveiour projectilePrefab;
+    public ProjectileBehaveiour LanuchableprojectilePrefab;
     public Transform LaunchOffset;
 
     [SerializeField] private LayerMask jumpableGround;
@@ -85,6 +86,5 @@ public class playermovement : MonoBehaviour
 
         transform.Rotate(0f, 180f, 0f);
     }  
-
 
 }

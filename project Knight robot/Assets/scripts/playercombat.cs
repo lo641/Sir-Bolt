@@ -17,14 +17,24 @@ public class playercombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Attack(); 
-        }   
+            Attack();  
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("throw boomerang");
+            AttackBoomerang();
+        }
     }  
+    void AttackBoomerang()
+    {
+        animator.SetTrigger("boomrang");
+
+    }
 void Attack()
     {
         // play an Attack animation  
         animator.SetTrigger("Attack");
-        animator.SetTrigger("boomrang");
+
         // Detact enemies in range of attack 
 
         // Damage them
