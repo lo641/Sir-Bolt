@@ -2,89 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playermovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private BoxCollider2D coll; 
-    private SpriteRenderer sprite;
-    private Animator anlm;
+    public float movementSpeed = 2.0f;
+    public float jumpSpeed = 4f;
+    public float groundRadiusCheck;
+    public LayerMask layers;
 
-    public ProjectileBehaveiour projectilePrefab;
-    public ProjectileBehaveiour LanuchableprojectilePrefab;
-    public Transform LaunchOffset;
+    Rigidbody2D rigidbody;
+    float moveInput;
+    bool jumpInput = false;
+    public bool faceLeft = false;
+    SpriteRenderer characterSprite;
 
-    [SerializeField] private LayerMask jumpableGround;
-
-    private float dirX = 0f;
-    [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private float jumpForce = 14f;
-
-    private enum MovementState { idle, running, jumping, falling } 
-
-    // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
-       rb = GetComponent<Rigidbody2D>(); 
-       coll = GetComponent<BoxCollider2D>();
-        sprite = GetComponent<SpriteRenderer>();
-       anlm = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        characterSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        
+        moveInput = Input.GetAxis("Horizontal");
+        jumpInput = Input.GetButton("Jump");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        //Checks to see what direction we are moving in.
+        //Flips hero sprite assets scale.
+        //This also changes the position of the other transforms inside the sprite transform
+        if (moveInput > 0)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+            faceLeft = false;
+            characterSprite.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (moveInput < 0)
+        {
+            faceLeft = true;
+            characterSprite.transform.localScale = new Vector3(-1, 1, 1);
+        }
+}
+
+    private void FixedUpdate()
+    {
+        Vector2 vel = rigidbody.velocity;
+        vel.x = moveInput * movementSpeed;
+
+        bool onGround = GroundCheck();
+
+        if(jumpInput == true && onGround == true)
+        {
+            vel.y = jumpSpeed;
         }
 
-        UpdateAnimationState();
+        rigidbody.velocity = vel;
     }
 
-    private void UpdateAnimationState()
+    bool GroundCheck()
     {
-        MovementState state;
+        Collider2D hitCollider = Physics2D.OverlapCircle(transform.position, groundRadiusCheck, layers);
+        return hitCollider != null;
+    }
 
-        if (dirX > 0f)
-        {
-            state = MovementState.running;
-            sprite.flipX = false;
-        }
-        else if (dirX < 0f)
-        {
-            state = MovementState.running;
-            sprite.flipX = true; 
-        }
-        else
-        {
-            state = MovementState.idle;
-        }  
-
-        if (rb.velocity.y > .1f)
-        {
-            state = MovementState.jumping;
-        } 
-        else if (rb.velocity.y < -.1f)
-        {
-            state = MovementState.falling;
-        }
-
-        anlm.SetInteger("state", (int)state);
-    } 
-    private bool IsGrounded()
+    private void OnDrawGizmos()
     {
-       return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
-    } 
-
-    private void Flip()
-    { 
-        // Switch the way the player is labelled as facing. 
-
-        transform.Rotate(0f, 180f, 0f);
-    }  
+        Gizmos.DrawWireSphere(transform.position, groundRadiusCheck);
+    }
 
 }

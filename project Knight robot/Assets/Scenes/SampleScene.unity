@@ -20733,9 +20733,10 @@ GameObject:
   - component: {fileID: 1142858918}
   - component: {fileID: 1142858917}
   - component: {fileID: 1142858916}
-  - component: {fileID: 1142858920}
   - component: {fileID: 1142858921}
   - component: {fileID: 1142858922}
+  - component: {fileID: 1142858923}
+  - component: {fileID: 1142858920}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20864,19 +20865,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142858915}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad7084436f359e41aaa7d0a9934bba6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5410bd36822652e4ca0e3184f9f0b6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
-  LanuchableprojectilePrefab: {fileID: 0}
-  LaunchOffset: {fileID: 0}
-  jumpableGround:
+  firepoint: {fileID: 810926266}
+  projectile: {fileID: 1413297311}
+  throwDistance: 5
+  throwSpeed: 3
+  layers:
     serializedVersion: 2
-    m_Bits: 64
-  moveSpeed: 7
-  jumpForce: 14
+    m_Bits: 0
 --- !u!95 &1142858921
 Animator:
   serializedVersion: 3
@@ -20903,18 +20903,35 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142858915}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d26665d3d499bb4f81f365956525822, type: 3}
+  m_Script: {fileID: 11500000, guid: f67e75417ba62e74ab3e142186282241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1142858921}
-  boomrang: {fileID: 0}
-  attackPoint: {fileID: 375755647}
-  attackRange: 0.5
-  enemyLayers:
+  movementSpeed: 2
+  jumpSpeed: 4
+  groundRadiusCheck: 0.3
+  layers:
     serializedVersion: 2
     m_Bits: 0
+  faceLeft: 0
+--- !u!114 &1142858923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142858915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad7084436f359e41aaa7d0a9934bba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 0
+  moveSpeed: 7
+  jumpForce: 14
 --- !u!1 &1239664865
 GameObject:
   m_ObjectHideFlags: 0
@@ -21008,14 +21025,13 @@ GameObject:
   - component: {fileID: 1413297311}
   - component: {fileID: 1413297313}
   - component: {fileID: 1413297312}
-  - component: {fileID: 1413297314}
   m_Layer: 0
   m_Name: boomrang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1413297311
 Transform:
   m_ObjectHideFlags: 0
@@ -21031,44 +21047,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1413297312
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413297310}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!50 &1413297313
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413297310}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &1413297314
+--- !u!114 &1413297312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21077,9 +21056,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413297310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98cc19bd3fdf9144a92a952703e6489c, type: 3}
+  m_Script: {fileID: 11500000, guid: f85c7e5b37a185e4d9b2a5114a9636f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
-  Launchoffset: {x: 0, y: 0, z: 0}
-  Thrown: 0
+--- !u!70 &1413297313
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413297310}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
