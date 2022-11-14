@@ -31,8 +31,8 @@ public class BoomrangAttack : MonoBehaviour
     void fire()
     {
         //Throw direction based on player facting 
-        Vector3 throwDirection = -firepoint.right; 
-        if (player.faceLeft == false) 
+        Vector3 throwDirection = -firepoint.right;
+        if (player.faceLeft == false)
             throwDirection = firepoint.right;
 
         //Shoot a raycast to see if it hits anything before the set distance 

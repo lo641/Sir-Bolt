@@ -7,7 +7,7 @@ public class playercombat : MonoBehaviour
 
     public Animator animator;
 
-    public Transform boomrang;
+   // public Transform boomrang;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -19,17 +19,17 @@ public class playercombat : MonoBehaviour
         {
             Attack();  
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("throw boomerang");
-            AttackBoomerang();
-        }
+     //   if (Input.GetKeyDown(KeyCode.S))
+       // {
+         //   Debug.Log("throw boomerang");
+           // AttackBoomerang();
+       // }
     }  
-    void AttackBoomerang()
-    {
-        animator.SetTrigger("boomrang");
+ //   void AttackBoomerang()
+   // {
+     //   animator.SetTrigger("boomrang");
 
-    }
+//    }
 void Attack()
     {
         // play an Attack animation  

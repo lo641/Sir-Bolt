@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
         else if (moveInput < 0)
         {
             faceLeft = true;
-            characterSprite.transform.localScale = new Vector3(-1, 1, 1);
+            characterSprite.flipX = true;
+            //characterSprite.transform.localScale = new Vector3(-1, 1, 1);
         }
 }
 
