@@ -34,6 +34,7 @@ public class BoomrangAttack : MonoBehaviour
         Vector3 throwDirection = -firepoint.right;
         if (player.faceLeft == false)
             throwDirection = firepoint.right;
+        
 
         //Shoot a raycast to see if it hits anything before the set distance 
         RaycastHit2D hit = Physics2D.Raycast(firepoint.position, throwDirection * throwDistance, throwDistance, layers); 

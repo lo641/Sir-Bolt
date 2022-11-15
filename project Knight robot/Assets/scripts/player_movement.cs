@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class player_movement : MonoBehaviour
 {
+    public AudioSource Walksound;
+    public AudioSource jumpsound;
     private Rigidbody2D rb;
     private BoxCollider2D coll; 
     private SpriteRenderer sprite;
@@ -31,15 +33,39 @@ public class player_movement : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        
+
+
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+            jumpsound.Play();
         }
 
         UpdateAnimationState();
-    }
+    
+        /*
+            if (Input.GetButton("Horizontal") && IsGrounded())
+            {
+                Walksound.Play();
+
+            }
+        */
+            if (rb.velocity.x != 0)
+            {
+                if (!Walksound.isPlaying)
+                {
+                    Walksound.Play();
+                }
+            } 
+            else
+            {
+                Walksound.Stop();
+            }
+        }
+
+            
+    
 
     private void UpdateAnimationState()
     {

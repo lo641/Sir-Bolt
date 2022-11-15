@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BommerangAttack : MonoBehaviour
 {
+    public AudioSource BoomrangThrow; 
     public Transform firePoint;
     public Transform projectile;
     public float throwDistance = 5f;
@@ -25,9 +26,10 @@ public class BommerangAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !returning && !throwing)
             Fire();
+        //BoomrangThrow.Play();
 
         ProjectileToDestination();
-        Return();
+        Return(); 
     }
 
     void Fire()
