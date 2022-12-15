@@ -26,7 +26,7 @@ public class BommerangAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !returning && !throwing)
             Fire();
-        //BoomrangThrow.Play();
+        
 
         ProjectileToDestination();
         Return(); 
@@ -35,12 +35,11 @@ public class BommerangAttack : MonoBehaviour
     void Fire()
     {
         //Shoot a raycast to see if it hits anything before the set distance
-
+        BoomrangThrow.Play();
         Vector3 throwDirection = -firePoint.right;
         if (player.faceLeft == false)
-            throwDirection = firePoint.right;
-        else
-                    if (player.faceLeft == true)
+            throwDirection = firePoint.right;   
+        if (player.faceLeft == true)
             throwDirection = -firePoint.right;
 
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, throwDirection * throwDistance, throwDistance, layers);
